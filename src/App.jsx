@@ -1,32 +1,21 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import * as React from 'react'
 import './App.css'
+import { motion } from 'framer-motion'
+import { StockInfo, RealTimePrice } from './config/api.js'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  var [tickerName, setTickerName] = React.useState('')
+  
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className="p-3">
+      <form className='grid place-items-center'>
+          <h1 className="text-3xl">Stock Search</h1>
+          <input className='w-1/2 p-3 mt-3 text-sm border-2 border-gray-200 bg-transparent rounded-md' id="name" placeholder='Stock Ticker' onChange={ (e) => setTickerName(e.target.value) }></input>
+          <motion.button type='submit' whileHover={{scale:1.2}} className='w-1/5 p-3 mt-3 text-sm bg-white bg-opacity-5 rounded-md' onClick={() => RealTimePrice(tickerName)}>
+            Submit
+          </motion.button>
+      </form>
     </div>
   )
 }
